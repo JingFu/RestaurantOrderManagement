@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+   <h:head>
+      <title>Register</title>
+      <h:outputStylesheet library="css" name="styles.css"/>
+      <h:outputScript library="javascript" name="jquery.min.js"/>
+      <h:outputScript library="javascript" name="registerValidation.js"/>
+   </h:head>
+   <h:body>
+      <h:form>
+         <h1>New user registration</h1>   
+         <table>
+            <tr>
+               <td>User Name:</td>
+               <td><h:inputText id="userName" value="#{register.userName}"/></td>
+            </tr>
+            <tr>
+            	<td>Role: </td>
+            	<td> 
+            		<h:selectOneMenu  value="#{register.role}">
+		                <f:selectItems value="#{register.roles}"/>
+	              	</h:selectOneMenu>  
+                </td>
+            </tr>
+            <tr>
+               <td>Password:</td>
+               <td><h:inputSecret id="password" value="#{register.password}"/></td>
+            </tr>
+            <tr>
+               <td>Confirm Password:</td>
+               <td><h:inputSecret id="passwordConfirm"/></td>
+            </tr>
+         </table>
+         <p><h:commandButton value="Register" action="#{register.createUser}" onclick="return checkPassword(this.form)"/></p>
+      </h:form>
+   </h:body>
+</html>

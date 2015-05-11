@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/04/2015 11:02:55 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="ProcessingOrder" table="processing_order" catalog="order_management">
+        <id name="processingOrderId" type="java.lang.Integer">
+            <column name="processing_order_id" />
+            <generator class="identity" />
+        </id>
+        <property name="tableNo" type="byte">
+            <column name="table_no" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="10" not-null="true" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" not-null="true" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="update_time" length="19" />
+        </property>
+        <property name="createBy" type="string">
+            <column name="create_by" length="30" not-null="true" />
+        </property>
+        <property name="updateBy" type="string">
+            <column name="update_by" length="30" />
+        </property>
+        <set name="processingDishes" table="processing_dish" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="processing_order_id" not-null="true" />
+            </key>
+            <one-to-many class="ProcessingDish" />
+        </set>
+    </class>
+</hibernate-mapping>

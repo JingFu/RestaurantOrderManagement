@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j">
+   <h:head>
+      <title>Orders waiting for processing</title>
+      <h:outputStylesheet library="css" name="styles.css"/>
+      <h:outputScript library="javascript" name="jquery.min.js"/>
+      <h:outputScript library="javascript" name="validation.js"/>
+   </h:head>
+   <h:body onload="#{rich:component('myTabPanel')}.switchToItem('#{orderProcessing.activeTab}');">
+   <h:form>
+   <rich:tabPanel  switchType="ajax" headerPosition="top" headerLocation="center" id="myTabPanel">
+     <rich:tab id="waiting_tab" header="Waiting Orders">
+   	  
+   	  <h2>Orders waiting for processing</h2> 
+   	  <c:forEach items="#{orderProcessing.orderWaitingMap}" var="entry">
+    	<h3><h:outputText value="#{entry.key}" /></h3>
+    	<p>
+		 <h:dataTable value="#{entry.value}" var="orderSummary" cellpadding="10px" 
+         	styleClass="order-table" headerClass="order-table-header" rowClasses="order-table-odd-row,order-table-even-row">
+        	<h:column><f:facet name="header">Dish Name</f:facet><h:outputText value="#{orderSummary.dishName}" /></h:column>
+        	<h:column><f:facet name="header">Quantity</f:facet><h:outputText value="#{orderSummary.quantity}" /></h:column>
+        	<h:column><f:facet name="header">Priority</f:facet><h:outputText value="#{orderSummary.priority}" /></h:column>
+        	<h:column>
+        		<f:facet name="header">Details</f:facet>
+			        <ui:repeat value="#{orderSummary.details}" var="detail">
+	            		Table #{detail.tableNo} : #{detail.quantityWaiting} <br/>
+	        		</ui:repeat>  
+        	</h:column>
+        	<h:column>
+        		<f:facet name="header">Process All</f:facet>
+        		<h:selectBooleanCheckbox value="#{orderSummary.processAll}" onclick="onProcessAllCheckboxClicked(this)"/>
+        	</h:column>
+        	<h:column>
+        		<f:facet name="header">Process Partially</f:facet>
+        		<rich:inputNumberSpinner value="#{orderSummary.processQuantity}" minValue="0" maxValue="#{orderSummary.quantity}"/> 
+        		<!--  <h:inputText size="3" value="#{orderSummary.processQuantity}" onkeyup=""/> -->
+        	</h:column>
+    	 </h:dataTable>
+    	</p>
+		</c:forEach>
+   	  	<h:commandButton value="Process" styleClass="processButton" action="#{orderProcessing.startProcess}" rendered="#{orderProcessing.processButtonRendered}"/>
+   	 </rich:tab>
+   	 <rich:tab id="processing_tab" header="Processing Orders">
+   	 	<h2>Orders in processing</h2>
+		<c:forEach items="#{orderProcessing.orderProcessingMap}" var="entry">
+    	<h3><h:outputText value="#{entry.key}" /></h3>
+    	<p>
+		 <h:dataTable value="#{entry.value}" var="orderSummary" cellpadding="10px" 
+         	styleClass="order-table" headerClass="order-table-header" rowClasses="order-table-odd-row,order-table-even-row">
+        	<h:column><f:facet name="header">Dish Name</f:facet><h:outputText value="#{orderSummary.dishName}" /></h:column>
+        	<h:column><f:facet name="header">Quantity</f:facet><h:outputText value="#{orderSummary.quantity}" /></h:column>
+        	<h:column><f:facet name="header">Priority</f:facet><h:outputText value="#{orderSummary.priority}" /></h:column>
+        	<h:column>
+        		<f:facet name="header">Details</f:facet>
+        			
+        	
+				    <c:if test="#{orderSummary.fromSingleTable}">
+				       <ui:repeat value="#{orderSummary.details}" var="detail">
+		            		Table #{detail.tableNo} <br/>
+		        		</ui:repeat>  
+				    </c:if>
+				    <c:if test="#{!orderSummary.fromSingleTable}">
+				        <ui:repeat value="#{orderSummary.details}" var="detail">
+		            		Table #{detail.tableNo} : #{detail.quantityProcessing} <br/>
+		        		</ui:repeat>  
+				    </c:if>
+				
+        	</h:column>
+        	<h:column>
+        		<f:facet name="header">Complete All</f:facet>
+        		<h:selectBooleanCheckbox value="#{orderSummary.processAll}" onclick="onProcessAllCheckboxClicked(this)"/>
+        	</h:column>
+        	<h:column>
+        		<f:facet name="header">Complete Partially</f:facet>
+        		<rich:inputNumberSpinner value="#{orderSummary.processQuantity}" minValue="0" maxValue="#{orderSummary.quantity}"/> 
+        		<!--  <h:inputText size="3" value="#{orderSummary.processQuantity}" onkeyup=""/> -->
+        	</h:column>
+    	 </h:dataTable>
+    	</p>
+		</c:forEach>
+   	  	<h:commandButton value="Complete" styleClass="processButton" action="#{orderProcessing.completeProcess}" 
+   	  	rendered="#{orderProcessing.completeButtonRendered}"/>
+   	 </rich:tab>
+    </rich:tabPanel>
+    
+    </h:form>
+   </h:body>
+</html>
+   

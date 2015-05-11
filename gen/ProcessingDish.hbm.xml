@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/04/2015 11:02:55 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="ProcessingDish" table="processing_dish" catalog="order_management">
+        <id name="processingDishId" type="java.lang.Integer">
+            <column name="processing_dish_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="processingOrder" class="ProcessingOrder" fetch="select">
+            <column name="processing_order_id" not-null="true" />
+        </many-to-one>
+        <property name="dishType" type="string">
+            <column name="dish_type" length="12" not-null="true" />
+        </property>
+        <property name="dishName" type="string">
+            <column name="dish_name" length="50" not-null="true" />
+        </property>
+        <property name="quantity" type="int">
+            <column name="quantity" not-null="true" />
+        </property>
+        <property name="unitPrice" type="big_decimal">
+            <column name="unit_price" precision="5" not-null="true" />
+        </property>
+        <property name="status" type="string">
+            <column name="status" length="9" not-null="true" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" not-null="true" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="update_time" length="19" />
+        </property>
+        <property name="createBy" type="string">
+            <column name="create_by" length="30" not-null="true" />
+        </property>
+        <property name="updateBy" type="string">
+            <column name="update_by" length="30" />
+        </property>
+    </class>
+</hibernate-mapping>

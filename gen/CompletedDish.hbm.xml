@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/04/2015 11:02:55 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="CompletedDish" table="completed_dish" catalog="order_management">
+        <id name="completedDishId" type="java.lang.Integer">
+            <column name="completed_dish_id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="completedOrder" class="CompletedOrder" fetch="select">
+            <column name="completed_order_id" not-null="true" />
+        </many-to-one>
+        <property name="dishType" type="string">
+            <column name="dish_type" length="12" not-null="true" />
+        </property>
+        <property name="dishName" type="string">
+            <column name="dish_name" length="50" not-null="true" />
+        </property>
+        <property name="quantity" type="int">
+            <column name="quantity" not-null="true" />
+        </property>
+        <property name="unitPrice" type="big_decimal">
+            <column name="unit_price" precision="5" not-null="true" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" not-null="true" />
+        </property>
+        <property name="createBy" type="string">
+            <column name="create_by" length="30" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
