@@ -9,6 +9,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
+import org.jingfu.order.enums.UserRoleEnum;
 import org.jingfu.order.model.AuthUser;
 import org.jingfu.order.service.LoginService;
 import org.jingfu.order.util.FacesUtil;
@@ -42,8 +43,14 @@ public class UserBean implements Serializable {
 			// get Http Session and store username
             HttpSession session = FacesUtil.getSession();
             session.setAttribute("username", user.getUserName());
+            session.setAttribute("role", user.getRole());
             setRole(user.getRole());
-            return "order";
+            if(UserRoleEnum.CHEF.getName().equals(role)) {
+            	return "processing";
+            } else {
+            	return "order";
+            }
+            
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
                     null,

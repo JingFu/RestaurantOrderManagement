@@ -7,15 +7,29 @@
       xmlns:rich="http://richfaces.org/rich"
       xmlns:a4j="http://richfaces.org/a4j">
    <h:head>
-      <title>Order Yum Cha</title>
+      <title>Order Submission</title>
       <h:outputStylesheet library="css" name="styles.css"/>
       <h:outputScript library="javascript" name="jquery.min.js"/>
       <h:outputScript library="javascript" name="validation.js"/>
    </h:head>
    <h:body>
-      <h:form>
-         <h2>Yum Cha Order</h2> 
-         <p>Welcome, #{user.userName} #{user.role}</p>
+   		<p>
+   		<table width="300" border="0">
+			<tr>
+				<td><div align="left" class="headerText">         				
+					<h:link value="Order Delivery Status" outcome="delivery" />
+				</div>
+				</td>
+				<td><div align="left" class="headerText">         				
+					<h:link value="Order Processing Status" outcome="processing" rendered="#{user.role eq 'ADMIN'}"/>
+					</div>
+				</td>
+			</tr>
+		</table>
+		</p>
+      	<h:form>
+         <h2>Order Submission</h2> 
+         <!--  <p>Welcome #{user.userName}, Your role is #{user.role}</p> -->
          <p>
          <h:panelGrid columns="2">
 		   <h:outputLabel>Table No:</h:outputLabel>
@@ -47,6 +61,7 @@
                	   </h:inputText>
                </td>
             </tr>
+            <br/>
             <tr>
             	<td width="200">
                	   <h:commandButton id="button_addToOrder" value="Add to Order">
@@ -87,7 +102,7 @@
 				</h:commandLink>
             </h:column>
          </h:dataTable>
-         <p><h:commandButton value="Submit" action="#{order.submit}"/>&nbsp;&nbsp;&nbsp;&nbsp;<h:commandButton value="View orders" action="#{order.viewOrders}"/></p>
+         <p><h:commandButton value="Submit" action="#{order.submit}"/></p>
       </h:form>
    </h:body>
 </html>
