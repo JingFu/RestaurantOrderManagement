@@ -2,10 +2,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:c="http://java.sun.com/jsp/jstl/core"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-      xmlns:rich="http://richfaces.org/rich"
-      xmlns:a4j="http://richfaces.org/a4j">
+      xmlns:comp="http://java.sun.com/jsf/composite/comp">
    <h:head>
       <title>Orders waiting for processing</title>
       <h:outputStylesheet library="css" name="styles.css"/>
@@ -13,6 +10,7 @@
       <h:outputScript library="javascript" name="validation.js"/>
    </h:head>
    <h:body>
+   <comp:header showOrderSubmission="true"  showOrderProcessing="#{user.role eq 'MANAGER'}" showOrderDelivery="false" showOrderSearch="true" showLogout="true"/>
    <h2>Orders ready for delivery</h2> 
    	 <h:form>
    	 	<c:forEach items="#{orderDelivery.orders}" var="order">
@@ -31,5 +29,6 @@
         	</h:dataTable>
    	 	</c:forEach>
    	 </h:form>
+   	 <comp:footer />
    </h:body>
 </html>

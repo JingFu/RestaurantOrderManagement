@@ -8,7 +8,8 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:fn="http://java.sun.com/jsp/jstl/functions"
       xmlns:rich="http://richfaces.org/rich"
-      xmlns:a4j="http://richfaces.org/a4j">
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:comp="http://java.sun.com/jsf/composite/comp">
    <h:head>
       <title>Orders waiting for processing</title>
       <h:outputStylesheet library="css" name="styles.css"/>
@@ -16,6 +17,7 @@
       <h:outputScript library="javascript" name="validation.js"/>
    </h:head>
    <h:body onload="#{rich:component('myTabPanel')}.switchToItem('#{orderProcessing.activeTab}');">
+   <comp:header showOrderSubmission="#{user.role eq 'MANAGER'}"  showOrderProcessing="false" showOrderDelivery="#{user.role eq 'MANAGER'}" showOrderSearch="true" showLogout="true"/>
    <h:form>
    <rich:tabPanel  switchType="ajax" headerPosition="top" headerLocation="center" id="myTabPanel">
      <rich:tab id="waiting_tab" header="Waiting Orders">
@@ -47,7 +49,8 @@
     	 </h:dataTable>
     	</p>
 		</c:forEach>
-   	  	<h:commandButton value="Process" styleClass="processButton" action="#{orderProcessing.startProcess}" rendered="#{orderProcessing.processButtonRendered}"/>
+   	  	<h:commandButton id="buttonProcess" value="Process" styleClass="processButton" action="#{orderProcessing.startProcess}" rendered="#{orderProcessing.processButtonRendered}"/>
+   	  	<h:message for="buttonProcess" />
    	 </rich:tab>
    	 <rich:tab id="processing_tab" header="Processing Orders">
    	 	<h2>Orders in processing</h2>
@@ -87,12 +90,13 @@
     	 </h:dataTable>
     	</p>
 		</c:forEach>
-   	  	<h:commandButton value="Complete" styleClass="processButton" action="#{orderProcessing.completeProcess}" 
+   	  	<h:commandButton id="buttonComplete" value="Complete" styleClass="processButton" action="#{orderProcessing.completeProcess}" 
    	  	rendered="#{orderProcessing.completeButtonRendered}"/>
+   	  	<h:message for="buttonComplete" />
    	 </rich:tab>
     </rich:tabPanel>
-    
     </h:form>
+    <comp:footer />
    </h:body>
 </html>
    

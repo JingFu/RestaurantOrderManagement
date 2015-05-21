@@ -145,12 +145,31 @@ public class OrderBean implements Serializable {
 	}
 	
 	public String submit() {
+		if(!validate(orderedItems)) {
+			FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "The order is empty",
+                    "Please try again!"));
+ 
+            return "";
+		}
 		ProcessingOrder order = orderService.assembleProcessingOrder(FacesUtil.getUserName(), tableNo, orderedItems);
 		orderService.saveProcessingOrder(order);
 //		initOrder();
 		return "order";
 	}
 	
+	private boolean validate(List<OrderItem> items) {
+		for(OrderItem item : items) {
+			if(item.getQuantity() > 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 	public String viewOrders() {
 		return "processing";
 	}

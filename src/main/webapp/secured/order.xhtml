@@ -5,7 +5,8 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:rich="http://richfaces.org/rich"
-      xmlns:a4j="http://richfaces.org/a4j">
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:comp="http://java.sun.com/jsf/composite/comp">
    <h:head>
       <title>Order Submission</title>
       <h:outputStylesheet library="css" name="styles.css"/>
@@ -13,7 +14,8 @@
       <h:outputScript library="javascript" name="validation.js"/>
    </h:head>
    <h:body>
-   		<p>
+   <comp:header showOrderSubmission="false"  showOrderProcessing="#{user.role eq 'MANAGER'}" showOrderDelivery="true" showOrderSearch="true" showLogout="true"/>
+   	<!--  <p>
    		<table width="300" border="0">
 			<tr>
 				<td><div align="left" class="headerText">         				
@@ -26,7 +28,7 @@
 				</td>
 			</tr>
 		</table>
-		</p>
+		</p> -->
       	<h:form>
          <h2>Order Submission</h2> 
          <!--  <p>Welcome #{user.userName}, Your role is #{user.role}</p> -->
@@ -38,7 +40,7 @@
 		</h:panelGrid>
 		</p>  
          <h4>Dim Sum Menu</h4>
-         
+         <span>
          <table>
             <tr>
                <td width="200">
@@ -61,19 +63,21 @@
                	   </h:inputText>
                </td>
             </tr>
-            <br/>
-            <tr>
-            	<td width="200">
-               	   <h:commandButton id="button_addToOrder" value="Add to Order">
-               	   		<f:ajax execute="menu_dishType menu_dishName input_quantity" listener="#{order.addToOrder}"  render="table_orderedItems quantity_error"/> 
-               	   </h:commandButton> 
-               </td>
-               <td width="200">
-               	   <h:message id="quantity_error" for="input_quantity" styleClass="error" showSummary="true" showDetail="false"/>
-               	   <!--  <h:message id="validation_error" for="button_addToOrder" styleClass="error"/> -->
-               </td>
-            </tr>
+           
          </table>
+         </span>
+         <span>
+         <table>
+         	<tr><td>
+         	<h:commandButton id="button_addToOrder" value="Add to Order">
+               	   		<f:ajax execute="menu_dishType menu_dishName input_quantity" listener="#{order.addToOrder}"  render="table_orderedItems quantity_error"/> 
+              	   </h:commandButton> 
+              	   </td></tr>
+             <tr><td>
+             <h:message id="quantity_error" for="input_quantity" styleClass="error" showSummary="true" showDetail="false"/>
+             </td></tr>
+      	 </table>
+         </span>
         
          <h4>Ordered Items</h4>
          <h:dataTable id="table_orderedItems" value="#{order.orderedItems}" var="orderedItem" cellpadding="10px" 
@@ -104,5 +108,6 @@
          </h:dataTable>
          <p><h:commandButton value="Submit" action="#{order.submit}"/></p>
       </h:form>
+      <comp:footer />
    </h:body>
 </html>

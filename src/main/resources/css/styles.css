@@ -46,12 +46,18 @@
 
 .processButton {
   position: fixed;
-  top: 150px;
+  top: 280px;
   left: 680px;
   width: 80px; 
   height: 30px;
 }
 
-.headerText {
-	font-size:20px; 
+.headerLink {
+	font-size:16px; 
+}
+
+.headerTitle {
+	font-family: "Comic Sans"; 
+	font-size:36px; 
+	font-style:italic;
 }

@@ -1,5 +1,6 @@
 target
 *.jar
+*.ucls
 .settings
 .project
 .classpath

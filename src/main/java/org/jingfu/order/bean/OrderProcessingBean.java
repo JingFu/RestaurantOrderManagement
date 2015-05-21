@@ -2,15 +2,19 @@ package org.jingfu.order.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 import org.jingfu.order.assembler.OrderAssembler;
 import org.jingfu.order.enums.DishStatusEnum;
@@ -99,6 +103,15 @@ public class OrderProcessingBean implements Serializable{
 	}
 	
 	public String startProcess() {
+		if(!validate(orderWaitingMap)) {
+			FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "No dish selected for processing",
+                    "Please try again!"));
+			activeTab = "waiting_tab";
+            return "";
+		}
 		Map<Integer, List<DishProcessingVO>> dishProcessingMap = assembler.assembleOrderProcessingVO(orderWaitingMap, DishStatusEnum.WAITING);
 		List<ProcessingOrder> orders = orderService.ProcessDishes(dishProcessingMap, DishStatusEnum.PROCESSING, FacesUtil.getUserName());
 		orderService.updateOrders(orders);
@@ -107,7 +120,31 @@ public class OrderProcessingBean implements Serializable{
 		return "processing";
 	}
 	
+	private boolean validate(
+			Map<String, List<DishOrderSummary>> orderMap) {
+		Collection<List<DishOrderSummary>> orderCollection = orderMap.values();
+		Iterator<List<DishOrderSummary>> iterator = orderCollection.iterator();
+		while(iterator.hasNext()) {
+			List<DishOrderSummary> summaries = iterator.next();
+			for(DishOrderSummary summary : summaries) {
+				if(summary.isProcessAll() || summary.getProcessQuantity() > 0) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public String completeProcess() {
+		if(!validate(orderProcessingMap)) {
+			FacesContext.getCurrentInstance().addMessage(
+                    null,
+                    new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "No dish selected for completing",
+                    "Please try again!"));
+			activeTab = "processing_tab";
+            return "";
+		}
 		Map<Integer, List<DishProcessingVO>> dishProcessingMap = assembler.assembleOrderProcessingVO(orderProcessingMap, DishStatusEnum.PROCESSING);
 		List<ProcessingOrder> orders = orderService.ProcessDishes(dishProcessingMap, DishStatusEnum.READY, FacesUtil.getUserName());
 		orderService.updateOrders(orders);

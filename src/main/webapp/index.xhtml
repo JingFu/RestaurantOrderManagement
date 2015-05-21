@@ -2,13 +2,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:comp="http://java.sun.com/jsf/composite/comp">
    <h:head>
       <title>Welcome</title>
    </h:head>
    <h:body>
+   	<comp:header showOrderSubmission="false"  showOrderProcessing="false" showOrderDelivery="false" showOrderSearch="false" showLogout="false"/>
       <h:form>
-         <h1>Yum Cha Order Management System</h1>   
+         <h2>Please login</h2>   
          <table>
             <tr>
                <td>Name:</td>
@@ -19,7 +21,12 @@
                <td><h:inputSecret value="#{user.password}"/></td>
             </tr>
          </table>
-         <p><h:commandButton value="Login" action="#{user.login}"/><h:outputText value="&#160;" /><a href="register.xhtml">Sign up</a></p>
+         <p>
+         <h:commandButton id="buttonLogin" value="Login" action="#{user.login}"/><h:outputText value="&#160;" /><a href="register.xhtml">Sign up</a>
+         <br/>
+         <h:messages globalOnly="true"/>
+         </p>
       </h:form>
+      <comp:footer />
    </h:body>
 </html>

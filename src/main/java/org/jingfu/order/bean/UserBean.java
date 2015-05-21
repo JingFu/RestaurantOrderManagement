@@ -65,7 +65,7 @@ public class UserBean implements Serializable {
 	public String logout() {
 		HttpSession session = FacesUtil.getSession();
 		session.invalidate();
-		return "login";
+		return "logout";
 	}
 	
 	public void setLoginService(LoginService loginService) {

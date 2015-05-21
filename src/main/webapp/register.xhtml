@@ -3,7 +3,8 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:comp="http://java.sun.com/jsf/composite/comp">
    <h:head>
       <title>Register</title>
       <h:outputStylesheet library="css" name="styles.css"/>
@@ -11,6 +12,7 @@
       <h:outputScript library="javascript" name="registerValidation.js"/>
    </h:head>
    <h:body>
+   	  <comp:header showOrderSubmission="false"  showOrderProcessing="false" showOrderDelivery="false" showOrderSearch="false" showLogout="false"/>
       <h:form>
          <h1>New user registration</h1>   
          <table>
@@ -35,7 +37,9 @@
                <td><h:inputSecret id="passwordConfirm"/></td>
             </tr>
          </table>
-         <p><h:commandButton value="Register" action="#{register.createUser}" onclick="return checkPassword(this.form)"/></p>
+         <p><h:commandButton id="buttonRegister" value="Register" action="#{register.createUser}" onclick="return checkPassword(this.form)"/>
+         <h:message for="buttonRegister"/></p>
       </h:form>
+      <comp:footer />
    </h:body>
 </html>

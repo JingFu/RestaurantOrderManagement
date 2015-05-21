@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      >
+      
+    <composite:interface>
+ 		<composite:attribute name="showOrderSubmission" />
+    	<composite:attribute name="showOrderProcessing" />
+    	<composite:attribute name="showOrderDelivery" />
+    	<composite:attribute name="showOrderSearch" />
+    	<composite:attribute name="showLogout" />
+    </composite:interface>
+ 
+    <composite:implementation>
+    <h:outputStylesheet library="css" name="styles.css"/>
+ 	<h:form>
+	<table width="800">
+		<tr>
+			<td><h:graphicImage library="images" name="logo.png" width="250" height="180" /></td>
+			<td valign="bottom">
+			<table>
+			<tr><td align="center"><h:outputText styleClass="headerTitle" value="Restaurant Order Management"/></td></tr>
+			<tr><td height="50"></td></tr>
+			<tr>
+				<td><span>         				
+					<h:link value="Order Submission" outcome="order" styleClass="headerLink" rendered="#{cc.attrs.showOrderSubmission}"/>
+				</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<span>         				
+					<h:link value="Order Processing" outcome="processing" styleClass="headerLink" rendered="#{cc.attrs.showOrderProcessing}"/>
+				</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<span>         				
+					<h:link value="Order Delivery" outcome="delivery" styleClass="headerLink" rendered="#{cc.attrs.showOrderDelivery}"/>
+					</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<span>         				
+					<h:link value="Order Search" outcome="delivery" styleClass="headerLink" rendered="#{cc.attrs.showOrderSearch}"/>
+					</span>
+				&nbsp;&nbsp;&nbsp;&nbsp;
+				<span>         				
+					<h:commandLink action="#{user.logout}" value="Log out" styleClass="headerLink" rendered="#{cc.attrs.showLogout}"/>
+				</span>
+				</td>
+			</tr>
+			</table>
+			</td>
+		</tr>
+	</table>
+	</h:form>
+ 
+    </composite:implementation>
+ 
+</html>
