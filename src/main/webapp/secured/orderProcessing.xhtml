@@ -19,10 +19,10 @@
    <h:body onload="#{rich:component('myTabPanel')}.switchToItem('#{orderProcessing.activeTab}');">
    <comp:header showOrderSubmission="#{user.role eq 'MANAGER'}"  showOrderProcessing="false" showOrderDelivery="#{user.role eq 'MANAGER'}" showOrderSearch="true" showLogout="true"/>
    <h:form>
+   <h2>Order processing</h2> 
+   <h:messages style="color:red;margin:8px;" />
    <rich:tabPanel  switchType="ajax" headerPosition="top" headerLocation="center" id="myTabPanel">
      <rich:tab id="waiting_tab" header="Waiting Orders">
-   	  
-   	  <h2>Orders waiting for processing</h2> 
    	  <c:forEach items="#{orderProcessing.orderWaitingMap}" var="entry">
     	<h3><h:outputText value="#{entry.key}" /></h3>
     	<p>
@@ -50,10 +50,8 @@
     	</p>
 		</c:forEach>
    	  	<h:commandButton id="buttonProcess" value="Process" styleClass="processButton" action="#{orderProcessing.startProcess}" rendered="#{orderProcessing.processButtonRendered}"/>
-   	  	<h:message for="buttonProcess" />
    	 </rich:tab>
    	 <rich:tab id="processing_tab" header="Processing Orders">
-   	 	<h2>Orders in processing</h2>
 		<c:forEach items="#{orderProcessing.orderProcessingMap}" var="entry">
     	<h3><h:outputText value="#{entry.key}" /></h3>
     	<p>
@@ -92,7 +90,6 @@
 		</c:forEach>
    	  	<h:commandButton id="buttonComplete" value="Complete" styleClass="processButton" action="#{orderProcessing.completeProcess}" 
    	  	rendered="#{orderProcessing.completeButtonRendered}"/>
-   	  	<h:message for="buttonComplete" />
    	 </rich:tab>
     </rich:tabPanel>
     </h:form>

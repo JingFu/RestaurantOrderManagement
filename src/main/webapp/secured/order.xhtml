@@ -15,20 +15,6 @@
    </h:head>
    <h:body>
    <comp:header showOrderSubmission="false"  showOrderProcessing="#{user.role eq 'MANAGER'}" showOrderDelivery="true" showOrderSearch="true" showLogout="true"/>
-   	<!--  <p>
-   		<table width="300" border="0">
-			<tr>
-				<td><div align="left" class="headerText">         				
-					<h:link value="Order Delivery Status" outcome="delivery" />
-				</div>
-				</td>
-				<td><div align="left" class="headerText">         				
-					<h:link value="Order Processing Status" outcome="processing" rendered="#{user.role eq 'ADMIN'}"/>
-					</div>
-				</td>
-			</tr>
-		</table>
-		</p> -->
       	<h:form>
          <h2>Order Submission</h2> 
          <!--  <p>Welcome #{user.userName}, Your role is #{user.role}</p> -->
@@ -57,7 +43,7 @@
                <td width="100">
                	   <b>Price:</b> $<h:outputText id="output_price" value="#{order.selectedDishPrice}"/>
                </td>
-               <td width="300">
+               <td width="400">
                	   <b>Quantity:</b> <h:inputText id="input_quantity" value="#{order.selectedDishQuantity}" size="3" validator="#{order.validateQuantity}" onkeyup="validateQuantity(this)">
                	   	<!-- <f:ajax event="keyup" render="quantity_error"/> -->
                	   </h:inputText>
@@ -80,6 +66,7 @@
          </span>
         
          <h4>Ordered Items</h4>
+         <h:messages style="color:red;margin:8px;" />
          <h:dataTable id="table_orderedItems" value="#{order.orderedItems}" var="orderedItem" cellpadding="10px" 
          	styleClass="order-table" headerClass="order-table-header" rowClasses="order-table-odd-row,order-table-even-row">
 
@@ -97,7 +84,9 @@
             </h:column>
             <h:column>
                <f:facet name="header">Quantity</f:facet>
-               <h:inputText size="3" value="#{orderedItem.quantity}" onkeyup="validateQuantity(this)"/>
+               <h:inputText size="3" value="#{orderedItem.quantity}" onkeyup="validateQuantity(this)">
+               	 	<f:convertNumber integerOnly="true" />
+               </h:inputText>
             </h:column>
             <h:column>
             	<h:commandLink>

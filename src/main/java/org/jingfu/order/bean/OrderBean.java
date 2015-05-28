@@ -47,12 +47,6 @@ public class OrderBean implements Serializable {
 	private BigDecimal selectedDishPrice;
 	private int selectedDishQuantity;
 	private List<OrderItem> orderedItems = new ArrayList<OrderItem>();
-//	private DataModel<OrderItem> orderItemDataModel = new ListDataModel<OrderItem>(orderedItems);
-	 
-	
-//	public OrderBean() {
-//		initOrder();
-//	}
 
 	@PostConstruct
 	private void initOrder() {
@@ -128,9 +122,6 @@ public class OrderBean implements Serializable {
 		
 	}
 	
-//	public void removeItem(int rowIndex) {
-//		orderedItems.remove(rowIndex);
-//	}
 	
 	public void removeItem(OrderItem item) {
 		orderedItems.remove(item);
@@ -139,7 +130,7 @@ public class OrderBean implements Serializable {
 	public void validateQuantity(FacesContext fc, UIComponent c, Object value) {
 		int quantity = (Integer) value;
 		if (quantity <= 0) {
-			throw new ValidatorException(new FacesMessage(
+			throw new ValidatorException (new FacesMessage(
 					"Quantity need to be a positive integer"));
 		}
 	}
@@ -156,7 +147,6 @@ public class OrderBean implements Serializable {
 		}
 		ProcessingOrder order = orderService.assembleProcessingOrder(FacesUtil.getUserName(), tableNo, orderedItems);
 		orderService.saveProcessingOrder(order);
-//		initOrder();
 		return "order";
 	}
 	
@@ -221,10 +211,6 @@ public class OrderBean implements Serializable {
 	public List<OrderItem> getOrderedItems() {
 		return orderedItems;
 	}
-	
-//	public DataModel getOrderedItems() {
-//		return orderItemDataModel;
-//	}
 	
 	public void setOrderService(OrderService orderService) {
 		this.orderService = orderService;

@@ -243,4 +243,22 @@ public class SessionManager {
 		Collections.sort(orders);
 		return orders;
 	}
+
+	public ProcessingOrder searchOrderByTableNo(byte tableNo) {
+		ProcessingOrder order = null;
+		session = HibernateUtil.getSessionfactory().openSession();
+		session.beginTransaction();
+		List<ProcessingOrder> result = session
+				.createQuery(
+						"from ProcessingOrder PO where PO.tableNo = :tableNo order by PO.createTime desc")
+				.setParameter("tableNo",
+						tableNo).list();
+		session.getTransaction().commit();
+		if (result != null && result.size() > 0) {
+			order = result.get(0);
+			Hibernate.initialize(order.getProcessingDishes());
+		}
+		session.close();
+		return order;
+	}
 }

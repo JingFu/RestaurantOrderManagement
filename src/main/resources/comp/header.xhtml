@@ -18,7 +18,7 @@
     <composite:implementation>
     <h:outputStylesheet library="css" name="styles.css"/>
  	<h:form>
-	<table width="800">
+	<table width="900">
 		<tr>
 			<td><h:graphicImage library="images" name="logo.png" width="250" height="180" /></td>
 			<td valign="bottom">
@@ -29,19 +29,19 @@
 				<td><span>         				
 					<h:link value="Order Submission" outcome="order" styleClass="headerLink" rendered="#{cc.attrs.showOrderSubmission}"/>
 				</span>
-				&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;
 				<span>         				
 					<h:link value="Order Processing" outcome="processing" styleClass="headerLink" rendered="#{cc.attrs.showOrderProcessing}"/>
 				</span>
-				&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;
 				<span>         				
 					<h:link value="Order Delivery" outcome="delivery" styleClass="headerLink" rendered="#{cc.attrs.showOrderDelivery}"/>
 					</span>
-				&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;
 				<span>         				
-					<h:link value="Order Search" outcome="delivery" styleClass="headerLink" rendered="#{cc.attrs.showOrderSearch}"/>
+					<h:link value="Order Search" outcome="search" styleClass="headerLink" rendered="#{cc.attrs.showOrderSearch}"/>
 					</span>
-				&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;
 				<span>         				
 					<h:commandLink action="#{user.logout}" value="Log out" styleClass="headerLink" rendered="#{cc.attrs.showLogout}"/>
 				</span>

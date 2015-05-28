@@ -1,0 +1,58 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:rich="http://richfaces.org/rich"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:comp="http://java.sun.com/jsf/composite/comp">
+   <h:head>
+      <title>Order Submission</title>
+      <h:outputStylesheet library="css" name="styles.css"/>
+      <h:outputScript library="javascript" name="jquery.min.js"/>
+      <h:outputScript library="javascript" name="validation.js"/>
+   </h:head>
+   <h:body>
+   <comp:header showOrderSubmission="#{user.role eq 'MANAGER' or user.role eq 'WAITING_STAFF'}"  showOrderProcessing="#{user.role eq 'MANAGER' or user.role eq 'CHEF'}" showOrderDelivery="#{user.role eq 'MANAGER' or user.role eq 'WAITING_STAFF'}" showOrderSearch="false" showLogout="true"/>
+      <h:form>
+         <h2>Order Search</h2> 
+         <h:messages style="color:red;margin:8px;" />
+         <h:panelGrid columns="3">
+		   <h:outputLabel>Table No:</h:outputLabel>
+		   <rich:inputNumberSpinner value="#{orderSearch.tableNo}" minValue="1" maxValue="30"/> 
+		   <h:commandButton value="Search" action="#{orderSearch.search}"/>
+		</h:panelGrid>
+	 </h:form>
+	 <h:outputText value="#{orderSearch.noSesultMessage}" style="font-weight:bold" />
+	 <h:dataTable value="#{orderSearch.dishes}" var="dish" cellpadding="10px" 
+        	styleClass="order-table" headerClass="order-table-header" rowClasses="order-table-odd-row,order-table-even-row">
+		 <h:column> 
+              <f:facet name="header">Name</f:facet>
+              #{dish.dishName}
+           </h:column>
+           <h:column>
+              <f:facet name="header">Total Quantity</f:facet>
+              #{dish.quantity}
+           </h:column>
+           <h:column>
+              <f:facet name="header">Status</f:facet>
+              #{dish.status}
+           </h:column>
+           <h:column>
+              <f:facet name="header">Waiting</f:facet>
+              #{dish.quantityWaiting}
+           </h:column>
+            <h:column>
+              <f:facet name="header">Processing</f:facet>
+              #{dish.quantityProcessing}
+           </h:column>
+            <h:column>
+              <f:facet name="header">Ready</f:facet>
+              #{dish.quantityReady}
+           </h:column>
+            <h:column>
+              <f:facet name="header">Completed</f:facet>
+              #{dish.quantityCompleted}
+           </h:column>
+    </h:dataTable>
+   <comp:footer />
+   </h:body>
+</html>

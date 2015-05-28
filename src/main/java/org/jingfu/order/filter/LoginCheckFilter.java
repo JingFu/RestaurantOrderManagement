@@ -75,9 +75,11 @@ public class LoginCheckFilter implements Filter {
 		List<String> waitingStaffPages = new ArrayList<String>();
 		waitingStaffPages.add("/OrderManagement/secured/order.xhtml");
 		waitingStaffPages.add("/OrderManagement/secured/orderDelivery.xhtml");
+		waitingStaffPages.add("/OrderManagement/secured/orderSearch.xhtml");
 		roleAndPageMap.put(UserRoleEnum.WAITING_STAFF.getName(), waitingStaffPages);
 		List<String> chefPages = new ArrayList<String>();
 		chefPages.add("/OrderManagement/secured/orderProcessing.xhtml");
+		chefPages.add("/OrderManagement/secured/orderSearch.xhtml");
 		roleAndPageMap.put(UserRoleEnum.CHEF.getName(), chefPages);
 		
 	}

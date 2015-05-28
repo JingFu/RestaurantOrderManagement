@@ -229,4 +229,15 @@ public class OrderService {
 		return false;
 	}
 
+	public Set<ProcessingDish> searchByTableNo(byte tableNo) {
+		ProcessingOrder order = sessionManager.searchOrderByTableNo(tableNo);
+		if(order == null) {
+			return null;
+		} else {
+			return order.getProcessingDishes();
+		}
+		
+	}
+
+
 }

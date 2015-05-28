@@ -11,6 +11,7 @@
    	<comp:header showOrderSubmission="false"  showOrderProcessing="false" showOrderDelivery="false" showOrderSearch="false" showLogout="false"/>
       <h:form>
          <h2>Please login</h2>   
+         <h:messages style="color:red;margin:8px;" />
          <table>
             <tr>
                <td>Name:</td>
@@ -24,7 +25,6 @@
          <p>
          <h:commandButton id="buttonLogin" value="Login" action="#{user.login}"/><h:outputText value="&#160;" /><a href="register.xhtml">Sign up</a>
          <br/>
-         <h:messages globalOnly="true"/>
          </p>
       </h:form>
       <comp:footer />
