@@ -108,7 +108,7 @@ public class OrderAssembler {
 			for(DishOrderSummary summary : summaryList) {
 				if(summary.isProcessAll()) {
 					for(DishVO dish : summary.getDetails()) {
-						addDishToOrderVO(dishProcessingMap, dish);
+						addDishToOrderVO(dishProcessingMap, dish, summary.getQuantity());
 					}
 				} else if(summary.getProcessQuantity() > 0){
 					int quantity = summary.getProcessQuantity();
@@ -141,7 +141,7 @@ public class OrderAssembler {
 		}
 		
 	}
-	
+	/*
 	private void addDishToOrderVO(
 	Map<Integer, List<DishProcessingVO>> dishProcessingMap, DishVO detail) {
 		if(dishProcessingMap.containsKey(detail.getOrderId())) {
@@ -163,7 +163,7 @@ public class OrderAssembler {
 		dishVO.setQuantity(detail.getQuantity());
 		return dishVO;
 	}
-	
+	*/
 	private DishProcessingVO assembleDishProcessingVO(DishVO detail, int processingQuantity) {
 		DishProcessingVO dishVO = new DishProcessingVO();
 		dishVO.setDishId(detail.getDishId());
