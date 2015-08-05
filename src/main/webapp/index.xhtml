@@ -6,6 +6,7 @@
       xmlns:comp="http://java.sun.com/jsf/composite/comp">
    <h:head>
       <title>Welcome</title>
+      <h:outputStylesheet library="css" name="styles.css"/>
    </h:head>
    <h:body>
    	<comp:header showOrderSubmission="false"  showOrderProcessing="false" showOrderDelivery="false" showOrderSearch="false" showLogout="false"/>
@@ -23,7 +24,7 @@
             </tr>
          </table>
          <p>
-         <h:commandButton id="buttonLogin" value="Login" action="#{user.login}"/><h:outputText value="&#160;" /><a href="register.xhtml">Sign up</a>
+         <h:commandButton id="buttonLogin" value="Login" action="#{user.login}"/><h:outputText value="&#160;" /><a class="headerLink" href="register.xhtml">Sign up</a>
          <br/>
          </p>
       </h:form>

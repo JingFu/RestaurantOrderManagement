@@ -10,7 +10,7 @@
       <h:outputScript library="javascript" name="jquery.min.js"/>
       <h:outputScript library="javascript" name="validation.js"/>
    </h:head>
-   <h:body>
+   <h:body styleClass="#{user.role eq 'WAITING_STAFF' ? 'waiter-background' : ''}">
    <comp:header showOrderSubmission="#{user.role eq 'MANAGER' or user.role eq 'WAITING_STAFF'}"  showOrderProcessing="#{user.role eq 'MANAGER' or user.role eq 'CHEF'}" showOrderDelivery="#{user.role eq 'MANAGER' or user.role eq 'WAITING_STAFF'}" showOrderSearch="false" showLogout="true"/>
       <h:form>
          <h2>Order Search</h2> 

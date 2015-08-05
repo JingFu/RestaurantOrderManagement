@@ -13,7 +13,7 @@
       <h:outputScript library="javascript" name="jquery.min.js"/>
       <h:outputScript library="javascript" name="validation.js"/>
    </h:head>
-   <h:body>
+   <h:body styleClass="#{user.role eq 'WAITING_STAFF' ? 'waiter-background' : ''}">
    <comp:header showOrderSubmission="false"  showOrderProcessing="#{user.role eq 'MANAGER'}" showOrderDelivery="true" showOrderSearch="true" showLogout="true"/>
       	<h:form>
          <h2>Order Submission</h2> 
@@ -66,7 +66,7 @@
          </span>
         
          <h4>Ordered Items</h4>
-         <h:messages style="color:red;margin:8px;" />
+         <h:messages styleClass="errorMsg" />
          <h:dataTable id="table_orderedItems" value="#{order.orderedItems}" var="orderedItem" cellpadding="10px" 
          	styleClass="order-table" headerClass="order-table-header" rowClasses="order-table-odd-row,order-table-even-row">
 

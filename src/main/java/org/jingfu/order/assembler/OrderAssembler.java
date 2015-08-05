@@ -108,7 +108,7 @@ public class OrderAssembler {
 			for(DishOrderSummary summary : summaryList) {
 				if(summary.isProcessAll()) {
 					for(DishVO dish : summary.getDetails()) {
-						addDishToOrderVO(dishProcessingMap, dish, summary.getQuantity());
+						addDishToOrderVO(dishProcessingMap, dish, status);
 					}
 				} else if(summary.getProcessQuantity() > 0){
 					int quantity = summary.getProcessQuantity();
@@ -141,29 +141,29 @@ public class OrderAssembler {
 		}
 		
 	}
-	/*
+	
 	private void addDishToOrderVO(
-	Map<Integer, List<DishProcessingVO>> dishProcessingMap, DishVO detail) {
+	Map<Integer, List<DishProcessingVO>> dishProcessingMap, DishVO detail, DishStatusEnum status) {
 		if(dishProcessingMap.containsKey(detail.getOrderId())) {
 			List<DishProcessingVO> dishVOs = dishProcessingMap.get(detail.getOrderId());
-			DishProcessingVO dishVO = assembleDishProcessingVO(detail);
+			DishProcessingVO dishVO = assembleDishProcessingVO(detail, status);
 			dishVOs.add(dishVO);
 		} else {
 			List<DishProcessingVO> dishVOs = new ArrayList<DishProcessingVO>();
-			DishProcessingVO dishVO = assembleDishProcessingVO(detail);
+			DishProcessingVO dishVO = assembleDishProcessingVO(detail, status);
 			dishVOs.add(dishVO);
 			dishProcessingMap.put(detail.getOrderId(), dishVOs);
 		}
 
 	}
 	
-	private DishProcessingVO assembleDishProcessingVO(DishVO detail) {
+	private DishProcessingVO assembleDishProcessingVO(DishVO detail, DishStatusEnum status) {
 		DishProcessingVO dishVO = new DishProcessingVO();
 		dishVO.setDishId(detail.getDishId());
-		dishVO.setQuantity(detail.getQuantity());
+		dishVO.setQuantity(getSpecificQuantity(detail, status));
 		return dishVO;
 	}
-	*/
+	
 	private DishProcessingVO assembleDishProcessingVO(DishVO detail, int processingQuantity) {
 		DishProcessingVO dishVO = new DishProcessingVO();
 		dishVO.setDishId(detail.getDishId());

@@ -14,7 +14,8 @@
    <h:body>
    	  <comp:header showOrderSubmission="false"  showOrderProcessing="false" showOrderDelivery="false" showOrderSearch="false" showLogout="false"/>
       <h:form>
-         <h1>New user registration</h1>   
+         <h1>New user registration</h1>  
+         <h:messages styleClass="errorMsg" /> 
          <table>
             <tr>
                <td>User Name:</td>
@@ -38,7 +39,7 @@
             </tr>
          </table>
          <p><h:commandButton id="buttonRegister" value="Register" action="#{register.createUser}" onclick="return checkPassword(this.form)"/>
-         <h:message for="buttonRegister"/></p>
+         </p>
       </h:form>
       <comp:footer />
    </h:body>

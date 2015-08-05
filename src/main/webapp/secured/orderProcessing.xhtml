@@ -20,7 +20,7 @@
    <comp:header showOrderSubmission="#{user.role eq 'MANAGER'}"  showOrderProcessing="false" showOrderDelivery="#{user.role eq 'MANAGER'}" showOrderSearch="true" showLogout="true"/>
    <h:form>
    <h2>Order processing</h2> 
-   <h:messages style="color:red;margin:8px;" />
+   <h:messages style="color:red;margin:8px;" /> 
    <rich:tabPanel  switchType="ajax" headerPosition="top" headerLocation="center" id="myTabPanel">
      <rich:tab id="waiting_tab" header="Waiting Orders">
    	  <c:forEach items="#{orderProcessing.orderWaitingMap}" var="entry">

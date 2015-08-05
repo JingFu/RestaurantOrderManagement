@@ -31,8 +31,7 @@ import org.jingfu.order.service.OrderService;
 // or import javax.enterprise.context.SessionScoped;
 import org.jingfu.order.util.FacesUtil;
 
-@ManagedBean(name="order") // or @Named("user")
-//@RequestScoped
+@ManagedBean(name="order")
 @ViewScoped
 public class OrderBean implements Serializable {
 	@ManagedProperty(value="#{orderService}")

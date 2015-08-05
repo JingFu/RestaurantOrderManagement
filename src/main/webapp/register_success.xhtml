@@ -6,12 +6,13 @@
       xmlns:comp="http://java.sun.com/jsf/composite/comp">
    <h:head>
       <title>Register Success</title>
+      <h:outputStylesheet library="css" name="styles.css"/>
    </h:head>
    <h:body>
    	  <comp:header showOrderSubmission="false"  showOrderProcessing="false" showOrderDelivery="false" showOrderSearch="false" showLogout="false"/>
       <h:form>
          <h1>The registration succeed, You can login to the application now</h1>   
-         <a href="index.xhtml">Go to login</a>
+         <a class="headerLink" href="index.xhtml">Go to login</a>
       </h:form>
       <comp:footer />
    </h:body>

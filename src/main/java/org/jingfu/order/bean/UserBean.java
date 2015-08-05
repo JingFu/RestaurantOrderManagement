@@ -55,8 +55,8 @@ public class UserBean implements Serializable {
 			FacesContext.getCurrentInstance().addMessage(
                     null,
                     new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    "Invalid user name or password!",
-                    "Please try again!"));
+                    "Invalid user name or password",
+                    "Please try again"));
  
             return "";
 		}

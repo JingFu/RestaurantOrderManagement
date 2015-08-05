@@ -10,6 +10,8 @@
 
 .error { color: red; }
 
+.errorMsg {color: red; margin: 8px;}
+
 .orderHeader1 {width: 150px; text-align: left;}
 
 .orderHeader2 {width: 300px; text-align: left;}
@@ -61,3 +63,14 @@
 	font-size:36px; 
 	font-style:italic;
 }
+
+.waiter-background {
+	/*
+	background-image: url("http://localhost:8080/OrderManagement/resources/images/waiting_staff.jpg");
+	background-size: 1096px 960px;
+    background-repeat: no-repeat;
+    background-color: #33CCCC;
+    */
+    background-color: #FFFFCC;
+}
+
